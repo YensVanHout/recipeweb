@@ -1,7 +1,8 @@
 export interface recipe {
-  Title: string;
-  Ingredients: [string | undefined];
-  Steps: [string | undefined];
-  Tags: [string | undefined];
-  Image?: File | undefined;
+  _id?: string;
+  title: string;
+  ingredients: [string | undefined];
+  steps: [string | undefined];
+  tags: [string | undefined];
+  image?: File | undefined;
 }

@@ -2,11 +2,7 @@
 import { ref } from "vue";
 import { recipe } from "../interfaces/interfaces.ts";
 import FormFieldset from "../components/FormFieldset.vue";
-
-const submitRecipe = () => {
-  const parsedData: string = JSON.stringify(recipe.value);
-  console.log(parsedData);
-};
+import axios from "axios";
 
 const title = ref<string>("");
 const ingredients = ref<[string | undefined]>([""]);
@@ -14,18 +10,24 @@ const steps = ref<[string | undefined]>([""]);
 const tags = ref<[string | undefined]>([""]);
 //const image = ref<File>();
 
-const recipe = ref<recipe>({
-  Title: title.value,
-  Ingredients: ingredients.value,
-  Steps: steps.value,
-  Tags: tags.value,
-  //  Image: image.value,
-});
+let apiURL = "http://localhost:8080/recipes/create";
+
+const submitRecipe = () => {
+  const recipe = ref<recipe>({
+    title: title.value,
+    ingredients: ingredients.value,
+    steps: steps.value,
+    tags: tags.value,
+    //  Image: image.value,
+  });
+  console.log(recipe.value);
+  axios.post(apiURL, recipe.value);
+};
 </script>
 
 <template>
   <form>
-    <div class="container mx-auto">
+    <div class="container mx-auto h-full">
       <div class="title w-1/3 mx-auto">
         <label for="title" class="text-3xl">Title:</label>
         <input
@@ -60,7 +62,7 @@ const recipe = ref<recipe>({
     </div>
     <div class="submit w-full flex justify-around">
       <button
-        type="submit"
+        type="button"
         class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         @click="submitRecipe()"
       >

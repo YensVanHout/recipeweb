@@ -2,11 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import AddRecipe from "../views/AddRecipe.vue";
 import RecipePage from "../views/RecipePage.vue";
-import "dotenv";
+
 const routes = [
   { path: "/", name: "Home", component: Home },
   { path: "/addrecipe", name: "Add Recipe", component: AddRecipe },
-  { path: "/randomrecipe", name: "Recipe", component: RecipePage },
+  { path: "/recipe/:id", name: "Recipe", component: RecipePage },
+  { path: "/randomRecipe", name: "Random Recipe", component: RecipePage },
 ];
 
 const router = createRouter({
