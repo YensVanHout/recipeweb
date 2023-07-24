@@ -20,7 +20,7 @@ const submitRecipe = () => {
     tags: tags.value,
     //  Image: image.value,
   });
-  console.log(recipe.value);
+  console.log(recipe);
   axios.post(apiURL, recipe.value);
 };
 </script>
