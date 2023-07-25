@@ -2,8 +2,6 @@
 const props = defineProps({
   Recipe: Object,
 });
-
-console.log(props.Recipe);
 </script>
 <template>
   <div v-if="props.Recipe?.title">

@@ -6,14 +6,13 @@ import Recipe from "../components/Recipe.vue";
 
 const recipe = ref<recipe>();
 const apiURL = "http://localhost:8080/randomRecipe";
-let loading = true;
-if (loading == true) {
+const loading = ref<boolean>(true);
+if (loading.value == true) {
   axios
     .get(apiURL)
     .then((res) => {
-      recipe.value = res.data;
-      loading = !loading;
-      console.log(recipe.value);
+      recipe.value = res.data[0];
+      loading.value = !loading.value;
     })
     .catch((error) => {
       console.log(error);
@@ -22,6 +21,6 @@ if (loading == true) {
 </script>
 <template>
   <div class="content w-1/2 mx-auto">
-    <Recipe :recipe="recipe" v-show="loading == false" />
+    <Recipe :Recipe="recipe" v-if="loading == false" />
   </div>
 </template>
