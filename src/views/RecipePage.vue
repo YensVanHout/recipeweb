@@ -22,7 +22,7 @@ if (id) {
 }
 </script>
 <template>
-  <div class="content w-1/2 mx-auto" v-if="recipe">
+  <div v-if="recipe">
     <Recipe :Recipe="recipe" />
   </div>
 </template>

@@ -17,10 +17,8 @@ axios
   });
 </script>
 <template>
-  <div class="container mx-auto h-screen">
-    <div
-      class="recipeContainer md:grid grid-cols-4 gap-4 justify-around md:mx-6"
-    >
+  <div>
+    <div>
       <div v-for="(item, index) in recipes">
         <RecipePreview :title="item.title" :id="item._id" :key="index" />
       </div>

@@ -20,7 +20,7 @@ if (loading.value == true) {
 }
 </script>
 <template>
-  <div class="content w-1/2 mx-auto">
+  <div>
     <Recipe :Recipe="recipe" v-if="loading == false" />
   </div>
 </template>
