@@ -5,7 +5,7 @@ import { recipe } from "../interfaces/interfaces";
 import { ref } from "vue";
 
 const recipes = ref<recipe[]>();
-let apiURL = "http://localhost:8080/recipes/";
+let apiURL = "http://localhost:8080/recipes?sort=desc";
 
 axios
   .get(apiURL)
@@ -18,7 +18,7 @@ axios
 </script>
 <template>
   <div class="md:w-2/3 mx-auto">
-    <h2>Some of our recipes</h2>
+    <h2 class="text-3xl">Latest recipes:</h2>
     <div class="md:flex flex-wrap justify-around">
       <RecipePreview
         v-for="(item, index) in recipes"

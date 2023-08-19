@@ -3,6 +3,8 @@ const props = defineProps({
   Name: String,
   Array: Array<String | undefined>,
 });
+
+const requiredIndex = 0;
 </script>
 <template>
   <div>
@@ -13,10 +15,13 @@ const props = defineProps({
       <div class="flex">
         <input
           type="text"
-          name="{{props.Name}}_{{ index }}"
-          id="{{props.Name}}_{{index}}"
+          name="{{ props.Name }}_{{ index }}"
+          id="{{
+          props.Name
+        }}_{{ index }}"
           v-model="props.Array![index]"
           class="mr-2"
+          :required="index === requiredIndex"
         />
 
         <button

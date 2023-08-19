@@ -13,11 +13,11 @@ const tags = ref<[string | undefined]>([""]);
 let apiURL = "http://localhost:8080/recipes/create";
 
 const submitRecipe = () => {
-  const recipe = ref<recipe>({
+  const recipe = ref({
     title: title.value,
-    ingredients: ingredients.value,
-    steps: steps.value,
-    tags: tags.value,
+    ingredients: ingredients.value.filter((str) => str !== ""),
+    steps: steps.value.filter((str) => str !== ""),
+    tags: tags.value.filter((str) => str !== ""),
     //  Image: image.value,
   });
   console.log(recipe);
@@ -27,12 +27,18 @@ const submitRecipe = () => {
 
 <template>
   <form class="w-fit md:w-1/2 mx-auto">
-    <div>
-      <div>
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title" v-model="title" />
-      </div>
-      <!-- <div >
+    <fieldset class="text-center mb-3">
+      <label for="title" class="block text-2xl">Title:</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        class="p-1 rounded"
+        v-model="title"
+        required
+      />
+    </fieldset>
+    <!-- <div >
         <label for="image">Image:</label>
         <input
           type="file"
@@ -46,23 +52,14 @@ const submitRecipe = () => {
           SVG, PNG, JPG or GIF (MAX. 800x400px).
         </p>
       </div> -->
-      <div class="md:flex">
-        <FormFieldset
-          class="w-full md:w-1/3 md:m-4"
-          Name="Ingredient"
-          :Array="ingredients"
-        />
-        <FormFieldset
-          class="w-full md:w-1/3 md:m-4"
-          Name="Step"
-          :Array="steps"
-        />
-        <FormFieldset
-          class="w-full md:w-1/3 md:m-4"
-          Name="Tags"
-          :Array="tags"
-        />
-      </div>
+    <div class="md:flex">
+      <FormFieldset
+        class="w-full md:w-1/3 md:m-4"
+        Name="Ingredient"
+        :Array="ingredients"
+      />
+      <FormFieldset class="w-full md:w-1/3 md:m-4" Name="Step" :Array="steps" />
+      <FormFieldset class="w-full md:w-1/3 md:m-4" Name="Tags" :Array="tags" />
     </div>
     <div>
       <button class="btn-primary" type="button" @click="submitRecipe()">

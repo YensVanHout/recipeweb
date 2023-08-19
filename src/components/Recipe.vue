@@ -37,6 +37,6 @@ const props = defineProps({
     </div>
   </div>
   <div v-else>
-    <h1>recipe not found</h1>
+    <h1 class="text-center text-3xl">Recipe not found</h1>
   </div>
 </template>
