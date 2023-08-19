@@ -2,18 +2,17 @@
 const props = defineProps<{
   title: string;
   id: string | undefined;
+  tags: [string | undefined];
 }>();
-const url = "/recipe/" + props.id;
 </script>
 <template>
-  <div>
-    <!-- <img
-      src="https://www.placeholder.co/400x300"
-      alt=""
-    /> -->
-    <div>
-      <a :href="url">{{ props.title }}</a>
-    </div>
+  <div class="card my-2 md:w-1/5">
+    <a :href="`/recipe/${props.id}`">
+      <h3>{{ props.title }}</h3>
+      <div class="tags flex justify-around">
+        <span v-for="tag in tags" class="pill">{{ tag }}</span>
+      </div>
+    </a>
   </div>
 </template>
 <style scoped></style>

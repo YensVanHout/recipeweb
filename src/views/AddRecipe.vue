@@ -26,7 +26,7 @@ const submitRecipe = () => {
 </script>
 
 <template>
-  <form>
+  <form class="w-fit md:w-1/2 mx-auto">
     <div>
       <div>
         <label for="title">Title:</label>
@@ -46,14 +46,28 @@ const submitRecipe = () => {
           SVG, PNG, JPG or GIF (MAX. 800x400px).
         </p>
       </div> -->
-      <div>
-        <FormFieldset Name="Ingredient" :Array="ingredients" />
-        <FormFieldset Name="Step" :Array="steps" />
-        <FormFieldset Name="Tags" :Array="tags" />
+      <div class="md:flex">
+        <FormFieldset
+          class="w-full md:w-1/3 md:m-4"
+          Name="Ingredient"
+          :Array="ingredients"
+        />
+        <FormFieldset
+          class="w-full md:w-1/3 md:m-4"
+          Name="Step"
+          :Array="steps"
+        />
+        <FormFieldset
+          class="w-full md:w-1/3 md:m-4"
+          Name="Tags"
+          :Array="tags"
+        />
       </div>
     </div>
     <div>
-      <button type="button" @click="submitRecipe()">Submit</button>
+      <button class="btn-primary" type="button" @click="submitRecipe()">
+        Submit
+      </button>
     </div>
   </form>
 </template>

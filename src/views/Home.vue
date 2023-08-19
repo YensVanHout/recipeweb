@@ -17,11 +17,16 @@ axios
   });
 </script>
 <template>
-  <div>
-    <div>
-      <div v-for="(item, index) in recipes">
-        <RecipePreview :title="item.title" :id="item._id" :key="index" />
-      </div>
+  <div class="md:w-2/3 mx-auto">
+    <h2>Some of our recipes</h2>
+    <div class="md:flex flex-wrap justify-around">
+      <RecipePreview
+        v-for="(item, index) in recipes"
+        :title="item.title"
+        :id="item._id"
+        :tags="item.tags"
+        :key="index"
+      />
     </div>
   </div>
 </template>
