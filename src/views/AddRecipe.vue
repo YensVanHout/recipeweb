@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { recipe } from "../interfaces/interfaces.ts";
 import FormFieldset from "../components/FormFieldset.vue";
 import axios from "axios";
 
@@ -10,7 +9,7 @@ const steps = ref<[string | undefined]>([""]);
 const tags = ref<[string | undefined]>([""]);
 //const image = ref<File>();
 
-let apiURL = "http://localhost:8080/recipes/create";
+let apiURL = process.env.API_URL + "/create";
 
 const submitRecipe = () => {
   const recipe = ref({
