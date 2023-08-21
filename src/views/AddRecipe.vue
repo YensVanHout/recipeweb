@@ -21,7 +21,13 @@ const submitRecipe = () => {
     //  Image: image.value,
   });
   console.log(recipe);
-  axios.post(apiURL, recipe.value);
+  axios
+    .post(apiURL, recipe.value)
+    .then((res) =>
+      res.status === 201
+        ? (window.location.href = `recipe/${res.data._id}`)
+        : null
+    );
 };
 </script>
 
