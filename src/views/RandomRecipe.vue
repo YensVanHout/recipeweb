@@ -5,7 +5,7 @@ import { recipe } from "../interfaces/interfaces.ts";
 import Recipe from "../components/Recipe.vue";
 
 const recipe = ref<recipe>();
-const apiURL = process.env.API_URL + "/randomRecipe";
+const apiURL = import.meta.env.VITE_API_URL + "/random?sample=1";
 const loading = ref<boolean>(true);
 if (loading.value == true) {
   axios

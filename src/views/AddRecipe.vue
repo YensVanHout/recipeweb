@@ -9,7 +9,7 @@ const steps = ref<[string | undefined]>([""]);
 const tags = ref<[string | undefined]>([""]);
 //const image = ref<File>();
 
-let apiURL = process.env.API_URL + "/create";
+let apiURL = import.meta.env.VITE_API_URL + "/create";
 
 const submitRecipe = () => {
   const recipe = ref({
