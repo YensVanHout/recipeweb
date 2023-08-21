@@ -5,7 +5,7 @@ import { recipe } from "../interfaces/interfaces";
 import { ref } from "vue";
 
 const recipes = ref<recipe[]>();
-let apiURL = "http://localhost:8080/recipes?sort=desc";
+let apiURL = process.env.API_URL + "?sort=desc";
 
 axios
   .get(apiURL)

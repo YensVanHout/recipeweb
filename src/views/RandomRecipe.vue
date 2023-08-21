@@ -5,7 +5,7 @@ import { recipe } from "../interfaces/interfaces.ts";
 import Recipe from "../components/Recipe.vue";
 
 const recipe = ref<recipe>();
-const apiURL = "http://localhost:8080/randomRecipe";
+const apiURL = process.env.API_URL + "/randomRecipe";
 const loading = ref<boolean>(true);
 if (loading.value == true) {
   axios
