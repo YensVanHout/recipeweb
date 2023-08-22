@@ -1,11 +1,16 @@
 <script setup lang="ts"></script>
 
 <template>
-  <nav>
-    <router-link to="/">Home</router-link>
-    <router-link to="/randomrecipe">Random Recipe</router-link>
-    <router-link to="/addRecipe">Add Recipe</router-link>
-    <router-link to="/about">About</router-link>
+  <nav class="flex justify-between">
+    <div id="main" class="w-1/3 flex justify-around">
+      <router-link to="/">Home</router-link>
+      <router-link to="/randomrecipe">Random Recipe</router-link>
+      <router-link to="/addRecipe">Add Recipe</router-link>
+      <router-link to="/about">About</router-link>
+    </div>
+    <div id="auth">
+      <router-link to="/login">Log in</router-link>
+    </div>
   </nav>
 </template>
 
