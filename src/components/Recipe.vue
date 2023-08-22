@@ -5,7 +5,9 @@ const props = defineProps({
 </script>
 <template>
   <div v-if="props.Recipe?.title">
-    <h2 class="text-3xl text-center">{{ props.Recipe?.title }}</h2>
+    <div id="title">
+      <h2 class="text-3xl text-center">{{ props.Recipe?.title }}</h2>
+    </div>
     <!-- <div class="image">
       <img
         src="https://static.ah.nl/static/recepten/img_RAM_PRD178796_1224x900_JPG.jpg"

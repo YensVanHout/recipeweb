@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import axios from "axios";
 import { ref } from "vue";
-import { recipe } from "../interfaces/interfaces.ts";
-import Recipe from "../components/Recipe.vue";
+import { recipe } from "../../interfaces/interfaces.ts";
+import Recipe from "../../components/Recipe.vue";
 
 const recipe = ref<recipe>();
-const apiURL = import.meta.env.VITE_API_URL + "/random?sample=1";
+const apiURL = import.meta.env.VITE_API_URL + "recipes/random?sample=1";
 const loading = ref<boolean>(true);
 if (loading.value == true) {
   axios

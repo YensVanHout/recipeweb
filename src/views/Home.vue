@@ -5,7 +5,7 @@ import { recipe } from "../interfaces/interfaces";
 import { ref } from "vue";
 
 const recipes = ref<recipe[]>();
-let apiURL = import.meta.env.VITE_API_URL + "?sort=desc";
+let apiURL = import.meta.env.VITE_API_URL + "recipes?sort=desc";
 
 axios
   .get(apiURL)

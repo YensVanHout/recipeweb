@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import axios from "axios";
-import { recipe } from "../interfaces/interfaces.ts";
+import { recipe } from "../../interfaces/interfaces.ts";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
-import Recipe from "../components/Recipe.vue";
+import Recipe from "../../components/Recipe.vue";
 
-const apiURL = import.meta.env.VITE_API_URL! + "/";
+const apiURL = import.meta.env.VITE_API_URL! + "recipes/";
 const route = useRoute();
 const id = computed(() => route.params.id);
 const recipe = ref<recipe>();
