@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import FormFieldset from "../components/FormFieldset.vue";
 import axios from "axios";
+import Title from "../components/Title.vue";
 
 const title = ref<string>("");
 const ingredients = ref<[string | undefined]>([""]);
@@ -31,19 +32,21 @@ const submitRecipe = () => {
 </script>
 
 <template>
-  <form class="w-fit md:w-1/2 mx-auto">
-    <fieldset class="text-center mb-3">
-      <label for="title" class="block text-2xl">Title:</label>
-      <input
-        type="text"
-        name="title"
-        id="title"
-        class="p-1 rounded"
-        v-model="title"
-        required
-      />
-    </fieldset>
-    <!-- <div >
+  <div id="container">
+    <Title class="md:w-2/3 mx-auto" title="Add recipe" />
+    <form class="w-fit md:w-1/2 mx-auto">
+      <fieldset class="text-center mb-3">
+        <label for="title" class="block text-2xl">Title:</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          class="p-1 rounded"
+          v-model="title"
+          required
+        />
+      </fieldset>
+      <!-- <div >
         <label for="image">Image:</label>
         <input
           type="file"
@@ -57,21 +60,34 @@ const submitRecipe = () => {
           SVG, PNG, JPG or GIF (MAX. 800x400px).
         </p>
       </div> -->
-    <div class="md:flex">
-      <FormFieldset
-        class="w-full md:w-1/3 md:m-4"
-        Name="Ingredient"
-        :Array="ingredients"
-      />
-      <FormFieldset class="w-full md:w-1/3 md:m-4" Name="Step" :Array="steps" />
-      <FormFieldset class="w-full md:w-1/3 md:m-4" Name="Tags" :Array="tags" />
-    </div>
-    <div>
-      <button class="btn-primary" type="button" @click="submitRecipe()">
-        Submit
-      </button>
-    </div>
-  </form>
+      <div class="md:flex">
+        <FormFieldset
+          class="w-full md:w-1/3 md:m-4"
+          Name="Ingredient"
+          :Array="ingredients"
+        />
+        <FormFieldset
+          class="w-full md:w-1/3 md:m-4"
+          Name="Step"
+          :Array="steps"
+        />
+        <FormFieldset
+          class="w-full md:w-1/3 md:m-4"
+          Name="Tags"
+          :Array="tags"
+        />
+      </div>
+      <div>
+        <button
+          class="btn-complementary mt-2 mx-auto px-6"
+          type="button"
+          @click="submitRecipe()"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <style scoped></style>

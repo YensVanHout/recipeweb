@@ -21,6 +21,7 @@ axios
     <h2 class="text-3xl">Latest recipes:</h2>
     <div class="md:flex flex-wrap justify-around">
       <RecipePreview
+        class="mx-2"
         v-for="(item, index) in recipes"
         :title="item.title"
         :id="item._id"
