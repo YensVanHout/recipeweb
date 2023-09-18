@@ -7,14 +7,9 @@ import { ref } from "vue";
 const recipes = ref<recipe[]>();
 let apiURL = import.meta.env.VITE_API_URL + "recipes?sort=desc";
 
-axios
-  .get(apiURL)
-  .then((res) => {
-    recipes.value = res.data;
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+axios.get(apiURL).then((res) => {
+  recipes.value = res.data;
+});
 </script>
 <template>
   <div class="md:w-2/3 mx-auto">
