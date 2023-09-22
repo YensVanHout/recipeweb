@@ -2,7 +2,7 @@
 
 <template>
   <nav class="flex justify-between">
-    <div id="main" class="w-1/3 flex justify-around">
+    <div id="main" class="w-1/2 flex justify-around">
       <router-link to="/">Home</router-link>
       <router-link to="/randomrecipe">Random Recipe</router-link>
       <router-link to="/addRecipe">Add Recipe</router-link>

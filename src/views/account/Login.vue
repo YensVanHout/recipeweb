@@ -23,7 +23,7 @@ const submitLogin = () => {
 <template>
   <div id="container">
     <Title class="md:w-2/3 mx-auto" title="Login" />
-    <form class="w-fit md:w-1/2 mx-auto">
+    <form autocomplete="off" class="w-fit md:w-1/2 mx-auto">
       <fieldset class="text-center mb-3">
         <label for="email" class="block text-2xl">E-mail:</label>
         <input

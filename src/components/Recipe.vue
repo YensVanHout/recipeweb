@@ -16,7 +16,7 @@ const props = defineProps({
 });
 </script>
 <template>
-  <div v-if="props.Recipe?.title">
+  <div v-if="props.Recipe?.title" class="md:w-2/3 mx-auto">
     <Modal
       @resolve="deleteRecipe(props.Recipe?._id)"
       @close="showModal = !showModal"
@@ -25,8 +25,16 @@ const props = defineProps({
       :message="`Are you sure you want to delete the following recipe: ${props.Recipe.title}`"
     />
 
-    <div id="title">
-      <h2 class="text-3xl text-center">{{ props.Recipe?.title }}</h2>
+    <div id="title" class="flex w-fit mx-auto">
+      <h2 class="text-3xl mr-4 h-full">
+        {{ props.Recipe?.title }}
+      </h2>
+      <button
+        class="btn-complementary mx-auto px-4"
+        @click="showModal = !showModal"
+      >
+        Delete Recipe
+      </button>
     </div>
     <!-- <div class="image">
       <img
@@ -57,12 +65,6 @@ const props = defineProps({
         {{ tag }}
       </span>
     </div>
-    <button
-      class="btn-complementary mt-2 mx-auto px-4"
-      @click="showModal = !showModal"
-    >
-      Delete Recipe
-    </button>
   </div>
 
   <div v-else>
