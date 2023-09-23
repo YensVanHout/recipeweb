@@ -7,9 +7,9 @@ import Title from "../../components/Title.vue";
 //import { email, required } from "@vuelidate/validators";
 
 const title = ref<string>("");
-const ingredients = ref<[string | undefined]>([""]);
-const steps = ref<[string | undefined]>([""]);
-const tags = ref<[string | undefined]>([""]);
+const ingredients = ref<string[] | undefined>(["", ""]);
+const steps = ref<string[] | undefined>(["", ""]);
+const tags = ref<string[] | undefined>([""]);
 //const image = ref<File>();
 
 let apiURL = import.meta.env.VITE_API_URL + "recipes/create";
@@ -17,9 +17,9 @@ let apiURL = import.meta.env.VITE_API_URL + "recipes/create";
 const submitRecipe = () => {
   const recipe = reactive({
     title: title.value,
-    ingredients: ingredients.value.filter((str) => str !== ""),
-    steps: steps.value.filter((str) => str !== ""),
-    tags: tags.value.filter((str) => str !== ""),
+    ingredients: ingredients.value?.filter((str) => str !== ""),
+    steps: steps.value?.filter((str) => str !== ""),
+    tags: tags.value?.filter((str) => str !== ""),
     //  Image: image.value,
   });
 
