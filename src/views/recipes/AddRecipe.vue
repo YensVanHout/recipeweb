@@ -10,6 +10,8 @@ const title = ref<string>("");
 const ingredients = ref<string[] | undefined>(["", ""]);
 const steps = ref<string[] | undefined>(["", ""]);
 const tags = ref<string[] | undefined>([""]);
+const tools = ref<string[] | undefined>([""]);
+const time = ref<string>("");
 //const image = ref<File>();
 
 let apiURL = import.meta.env.VITE_API_URL + "recipes/create";
@@ -20,6 +22,8 @@ const submitRecipe = () => {
     ingredients: ingredients.value?.filter((str) => str !== ""),
     steps: steps.value?.filter((str) => str !== ""),
     tags: tags.value?.filter((str) => str !== ""),
+    tools: tools.value?.filter((str) => str !== ""),
+    time: time.value,
     //  Image: image.value,
   });
 
@@ -48,6 +52,17 @@ const submitRecipe = () => {
           required
         />
       </fieldset>
+      <fieldset class="text-center mb-3">
+        <label for="time" class="block text-2xl">Time to cook:</label>
+        <input
+          type="text"
+          name="time"
+          id="time"
+          class="p-1 rounded"
+          v-model="time"
+          required
+        />
+      </fieldset>
       <!-- <div >
         <label for="image">Image:</label>
         <input
@@ -72,6 +87,11 @@ const submitRecipe = () => {
           class="w-full md:w-1/3 md:m-4"
           Name="Step"
           :Array="steps"
+        />
+        <FormFieldset
+          class="w-full md:w-1/3 md:m-4"
+          Name="Tool"
+          :Array="tools"
         />
         <FormFieldset
           class="w-full md:w-1/3 md:m-4"

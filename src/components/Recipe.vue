@@ -25,8 +25,8 @@ const props = defineProps({
       :message="`Are you sure you want to delete the following recipe: ${props.Recipe.title}`"
     />
 
-    <div id="title" class="flex w-fit mx-auto">
-      <h2 class="text-3xl mr-4 h-full">
+    <div id="title" class="md:flex w-fit mx-auto">
+      <h2 class="text-3xl mr-4 h-full text-center">
         {{ props.Recipe?.title }}
       </h2>
       <button
@@ -35,6 +35,9 @@ const props = defineProps({
       >
         Delete Recipe
       </button>
+    </div>
+    <div class="text-center m-4">
+      <h3 class="text-2xl mr-4 h-full">{{ props.Recipe?.time }}</h3>
     </div>
     <!-- <div class="image">
       <img
@@ -51,6 +54,14 @@ const props = defineProps({
           </li>
         </ul>
       </div>
+      <div id="toolList" class="mt-6 w-1/6 md:text-xl">
+        <h2 class="text-2xl">Tools:</h2>
+        <ul class="list-disc">
+          <li v-for="tool in props.Recipe?.tools">
+            {{ tool }}
+          </li>
+        </ul>
+      </div>
       <div id="stepList" class="mt-6 w-1/6 md:text-xl">
         <h2 class="text-2xl">Steps:</h2>
         <ol class="list-decimal">
@@ -60,6 +71,7 @@ const props = defineProps({
         </ol>
       </div>
     </div>
+
     <div id="tagList" class="mt-6 flex justify-center">
       <span class="pill" v-for="tag in props.Recipe?.tags">
         {{ tag }}
