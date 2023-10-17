@@ -16,7 +16,11 @@ const submitLogin = () => {
 
   axios
     .post(apiURL, login)
-    .then((res) => (res.status === 201 ? (window.location.href = `/`) : null));
+    .then((res) =>
+      res.status === 201
+        ? (window.location.href = `/`)
+        : console.log(res.data.Message)
+    );
 };
 </script>
 
