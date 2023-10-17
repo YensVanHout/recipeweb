@@ -3,8 +3,6 @@ const props = defineProps({
   Name: String,
   Array: Array<String | undefined>,
 });
-
-const requiredIndex = 0;
 </script>
 <template>
   <div>
@@ -21,7 +19,7 @@ const requiredIndex = 0;
         }}_{{ index }}"
           v-model="props.Array![index]"
           class="mr-2"
-          :required="index === requiredIndex"
+          :required="index === 0"
         />
 
         <button
@@ -45,11 +43,11 @@ const requiredIndex = 0;
       </div>
     </fieldset>
     <button
-      class="btn-primary"
+      class="btn-primary whitespace-nowrap"
       type="button"
       @click="() => props.Array!.push(undefined)"
     >
-      Add ingredient
+      Add {{ props.Name }}
     </button>
   </div>
 </template>
