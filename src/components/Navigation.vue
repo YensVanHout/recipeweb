@@ -1,15 +1,17 @@
 <script setup lang="ts"></script>
 
 <template>
-  <nav class="flex justify-between">
-    <div id="main" class="w-1/2 flex justify-around">
+  <nav>
+    <div id="main">
       <router-link to="/">Home</router-link>
-      <router-link to="/randomrecipe">Random Recipe</router-link>
-      <router-link to="/addRecipe">Add Recipe</router-link>
+      <router-link to="/collection">Collection</router-link>
+      <router-link to="/randomrecipe">Random</router-link>
+      <router-link to="/addRecipe">Add</router-link>
       <router-link to="/about">About</router-link>
     </div>
     <div id="auth">
       <router-link to="/login">Log in</router-link>
+      <router-link to="/register">Register</router-link>
     </div>
   </nav>
 </template>
@@ -20,16 +22,23 @@ nav {
     border-b-2 border-gray-200
     flex items-center gap-5
     my-10 mx-auto
-    max-w-5xl;
+    max-w-5xl justify-between;
 }
-nav a,
-nav span {
-  @apply text-gray-500;
+
+#main {
+  @apply w-3/4 md:w-1/3 flex justify-around;
+}
+nav a {
+  @apply text-gray-500 text-clip;
 }
 nav a:hover {
   @apply text-black;
 }
-main nav {
+#main nav {
   @apply border-0;
+}
+
+#auth {
+  @apply w-1/5 flex justify-around;
 }
 </style>
