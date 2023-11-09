@@ -6,7 +6,7 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <div class="card my-2 md:w-1/4">
+  <div class="card dark:bg-stone-200 my-2 md:w-1/4">
     <a :href="`/recipe/${props.id}`">
       <h3>
         {{ props.title }}

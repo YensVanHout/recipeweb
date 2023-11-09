@@ -42,7 +42,9 @@ const submitRecipe = () => {
     <Title class="md:w-2/3 mx-auto" title="Add recipe" />
     <form class="w-fit md:w-1/2 mx-auto">
       <fieldset class="text-center mb-3">
-        <label for="title" class="block text-2xl">Title:</label>
+        <label for="title" class="block text-2xl dark:text-stone-200"
+          >Title:</label
+        >
         <input
           type="text"
           name="title"
@@ -53,7 +55,9 @@ const submitRecipe = () => {
         />
       </fieldset>
       <fieldset class="text-center mb-3">
-        <label for="time" class="block text-2xl">Time to cook:</label>
+        <label for="time" class="block text-2xl dark:text-stone-200"
+          >Time to cook:</label
+        >
         <input
           type="text"
           name="time"

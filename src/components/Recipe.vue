@@ -16,7 +16,7 @@ const props = defineProps({
 });
 </script>
 <template>
-  <div v-if="props.Recipe?.title" class="md:w-2/3 mx-auto">
+  <div v-if="props.Recipe?.title" class="md:w-2/3 mx-auto dark:text-slate-200">
     <Modal
       @resolve="deleteRecipe(props.Recipe?._id)"
       @close="showModal = !showModal"

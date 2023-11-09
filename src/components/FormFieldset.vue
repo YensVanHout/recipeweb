@@ -7,7 +7,7 @@ const props = defineProps({
 <template>
   <div>
     <fieldset v-for="(item, index) in $props.Array">
-      <label :for="`{{props.Name}}_{{ index }}`">
+      <label class="dark:text-stone-200" :for="`{{props.Name}}_{{ index }}`">
         {{ props.Name }} {{ index + 1 }} :
       </label>
       <div class="flex">
