@@ -8,7 +8,7 @@ const recipes = ref<recipe[]>();
 let apiURL = import.meta.env.VITE_API_URL + "recipes?page=1&limit=6&sort=asc";
 
 axios.get(apiURL).then((res) => {
-  recipes.value = res.data;
+  recipes.value = res.data.recipes;
 });
 </script>
 <template>
