@@ -23,9 +23,8 @@ axios.get(apiURL + "recipes?sort=desc").then((res) => {
 </script>
 <template>
   <div class="md:w-2/3 mx-auto">
-    <Title class="md:w-2/3 mx-auto" title="Collection" />
+    <Title title="Collection" />
     <SubTitle
-      class="md:w-2/3 mx-auto"
       :title="loading == true ? 'Fetching recipes ...' : loading == false && recipes!.recipes.length >= 0 ? recipes?.amount.toString() + ' recipes found' : 'Error fetching recipes ...'"
     />
     <div class="md:flex flex-wrap justify-around">
