@@ -1,8 +1,10 @@
 export interface recipe {
-  _id?: string;
+  date_create: string | null;
+  id: string;
+  ingredients: string[];
+  steps: string[];
+  tags: string[] | null;
+  time: string | null;
   title: string;
-  ingredients: [string | undefined];
-  steps: [string | undefined];
-  tags: [string | undefined];
-  image?: File | undefined;
+  tools: string[] | null;
 }

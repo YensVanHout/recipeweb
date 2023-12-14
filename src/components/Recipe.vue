@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
 import { ref } from "vue";
 import Modal from "./Modal.vue";
 
@@ -7,9 +6,7 @@ const showModal = ref<Boolean>(false);
 
 const deleteRecipe = (id: string | undefined) => {
   console.log(props.Recipe);
-  axios.delete(`http://localhost:8080/recipes/delete/${id}`).then(() => {
-    window.location.href = "/";
-  });
+  console.log(id);
 };
 const props = defineProps({
   Recipe: Object,
@@ -23,6 +20,7 @@ const props = defineProps({
       v-if="showModal"
       type="delete"
       :message="`Are you sure you want to delete the following recipe: ${props.Recipe.title}`"
+      :title="`Delete recipe ${props.Recipe.title}`"
     />
 
     <div id="title" class="md:flex w-fit mx-auto">

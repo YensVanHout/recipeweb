@@ -1,27 +1,21 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
-import axios from "axios";
+import { ref } from "vue";
 import Title from "../../components/Title.vue";
+import { supabase } from "../../lib/supabaseClient";
 
 const email = ref<string>("");
 const password = ref<string>("");
 
-let apiURL = import.meta.env.VITE_API_URL + "auth/login";
+const errorMsg = ref();
 
-const submitLogin = () => {
-  const login = reactive({
+async function signInWithEmail() {
+  const { data, error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
   });
 
-  axios
-    .post(apiURL, login)
-    .then((res) =>
-      res.status === 201
-        ? (window.location.href = `/`)
-        : console.log(res.data.Message)
-    );
-};
+  !error ? console.log(data) : (errorMsg.value = error);
+}
 </script>
 
 <template>
@@ -52,7 +46,7 @@ const submitLogin = () => {
         <button
           class="btn-complementary mt-2 mx-auto px-6"
           type="button"
-          @click="submitLogin()"
+          @click="signInWithEmail()"
         >
           Submit
         </button>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import axios from "axios";
 import RecipePreview from "../../components/RecipePreview.vue";
 import { recipe } from "../../interfaces/interfaces";
 import { ref } from "vue";
@@ -12,14 +11,8 @@ interface CollectionCall {
 }
 
 const recipes = ref<CollectionCall>();
-let apiURL = import.meta.env.VITE_API_URL;
 
 let loading: boolean = true;
-
-axios.get(apiURL + "recipes?sort=desc").then((res) => {
-  recipes.value = res.data;
-  loading = false;
-});
 </script>
 <template>
   <div class="md:w-2/3 mx-auto">
@@ -33,7 +26,7 @@ axios.get(apiURL + "recipes?sort=desc").then((res) => {
         class="mx-2"
         v-for="(item, index) in recipes?.recipes"
         :title="item.title"
-        :id="item._id"
+        :id="item.id"
         :tags="item.tags"
         :key="index"
       />

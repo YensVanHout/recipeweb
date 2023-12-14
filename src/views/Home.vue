@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import axios from "axios";
 import RecipePreview from "../components/RecipePreview.vue";
 import { recipe } from "../interfaces/interfaces";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+
+import { supabase } from "../lib/supabaseClient";
 
 const recipes = ref<recipe[]>();
-let apiURL = import.meta.env.VITE_API_URL + "recipes?page=1&limit=6&sort=asc";
 
-axios.get(apiURL).then((res) => {
-  recipes.value = res.data.recipes;
+async function getRecipes() {
+  const { data } = await supabase.from("recipes").select().limit(6);
+  recipes.value = data as unknown as recipe[];
+}
+
+onMounted(() => {
+  getRecipes();
 });
 </script>
 <template>
@@ -19,7 +24,7 @@ axios.get(apiURL).then((res) => {
         class="mx-2"
         v-for="(item, index) in recipes"
         :title="item.title"
-        :id="item._id"
+        :id="item.id"
         :tags="item.tags"
         :key="index"
       />

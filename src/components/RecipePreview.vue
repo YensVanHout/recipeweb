@@ -2,7 +2,7 @@
 const props = defineProps<{
   title: string;
   id: string | undefined;
-  tags: [string | undefined];
+  tags: string[] | null;
 }>();
 </script>
 <template>

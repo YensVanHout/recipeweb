@@ -1,25 +1,26 @@
 <script setup lang="ts">
-import axios from "axios";
 import { recipe } from "../../interfaces/interfaces.ts";
-import { computed, ref } from "vue";
+import { ComputedRef, computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import Recipe from "../../components/Recipe.vue";
+import { supabase } from "../../lib/supabaseClient";
 
-const apiURL = import.meta.env.VITE_API_URL! + "recipes/";
 const route = useRoute();
-const id = computed(() => route.params.id);
+const id: ComputedRef<string> = computed(() => route.params.id.toString());
 const recipe = ref<recipe>();
+const errorMsg = ref();
 
-if (id) {
-  axios
-    .get(apiURL + id.value)
-    .then((res) => {
-      recipe.value = res.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+async function getRecipeById(id: ComputedRef<string>) {
+  const { data, error } = await supabase.from("recipes").select().eq("id", id);
+
+  !error
+    ? (recipe.value = data as unknown as recipe)
+    : (errorMsg.value = error);
 }
+
+onMounted(() => {
+  getRecipeById(id);
+});
 </script>
 <template>
   <div v-if="recipe">

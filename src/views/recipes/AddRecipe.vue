@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import FormFieldset from "../../components/FormFieldset.vue";
-import axios from "axios";
 import Title from "../../components/Title.vue";
-//import { useVuelidate } from "@vuelidate/core";
-//import { email, required } from "@vuelidate/validators";
+import { supabase } from "../../lib/supabaseClient";
+
+const errorMsg = ref();
 
 const title = ref<string>("");
 const ingredients = ref<string[] | undefined>(["", ""]);
@@ -14,10 +14,19 @@ const tools = ref<string[] | undefined>([""]);
 const time = ref<string>("");
 //const image = ref<File>();
 
-let apiURL = import.meta.env.VITE_API_URL + "recipes/create";
+async function getUsername() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-const submitRecipe = () => {
+  return user?.email;
+}
+
+const creator = getUsername();
+
+const submitRecipe = async () => {
   const recipe = reactive({
+    creator: creator,
     title: title.value,
     ingredients: ingredients.value?.filter((str) => str !== ""),
     steps: steps.value?.filter((str) => str !== ""),
@@ -27,13 +36,9 @@ const submitRecipe = () => {
     //  Image: image.value,
   });
 
-  axios
-    .post(apiURL, recipe)
-    .then((res) =>
-      res.status === 201
-        ? (window.location.href = `recipe/${res.data._id}`)
-        : null
-    );
+  const { error } = await supabase.from("recipes").insert(recipe);
+
+  error ? (errorMsg.value = error) : null;
 };
 </script>
 

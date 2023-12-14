@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
-import axios from "axios";
+import { ref } from "vue";
 import Title from "../../components/Title.vue";
+import { supabase } from "../../lib/supabaseClient";
 
-const username = ref<string>("");
-const password = ref<string>("");
 const email = ref<string>("");
+const password = ref<string>("");
 
-let apiURL = import.meta.env.VITE_API_URL + "auth/register";
+const errorMsg = ref();
 
-const submitLogin = () => {
-  const account = reactive({
-    username: username.value,
+async function signUpNewUser() {
+  const { error } = await supabase.auth.signUp({
     email: email.value,
     password: password.value,
+    options: {
+      emailRedirectTo: "http://localhost:5173/",
+    },
   });
 
-  axios
-    .post(apiURL, account)
-    .then((res) => (res.status === 201 ? (window.location.href = `/`) : null));
-};
+  errorMsg.value = error;
+}
 </script>
 
 <template>
@@ -27,15 +26,6 @@ const submitLogin = () => {
     <Title class="md:w-2/3 mx-auto" title="Register" />
     <form autocomplete="off" class="w-fit md:w-1/2 mx-auto">
       <fieldset class="text-center mb-3">
-        <label for="username" class="block text-2xl">Username:</label>
-        <input
-          type="username"
-          name="username"
-          id="username"
-          class="p-1 rounded"
-          v-model="username"
-          required
-        />
         <label for="email" class="block text-2xl">E-mail:</label>
         <input
           type="email"
@@ -59,7 +49,7 @@ const submitLogin = () => {
         <button
           class="btn-complementary mt-2 mx-auto px-6"
           type="button"
-          @click="submitLogin()"
+          @click="signUpNewUser()"
         >
           Register
         </button>

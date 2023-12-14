@@ -1,8 +1,30 @@
 <script setup lang="ts">
 import { useDark, useToggle } from "@vueuse/core";
+import { supabase } from "../lib/supabaseClient";
+import { onMounted, ref } from "vue";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
+const userLoggedIn = ref(false);
+
+const errorMsg = ref();
+
+async function signOut() {
+  const { error } = await supabase.auth.signOut();
+
+  errorMsg.value = error;
+  window.location.pathname = "/";
+}
+
+async function checkUserState() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  userLoggedIn.value = user ? true : false;
+}
+
+onMounted(() => checkUserState());
 </script>
 
 <template>
@@ -28,6 +50,7 @@ const toggleDark = useToggle(isDark);
       <router-link
         class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white"
         to="/addRecipe"
+        v-show="userLoggedIn"
         >Add</router-link
       >
       <router-link
@@ -37,7 +60,7 @@ const toggleDark = useToggle(isDark);
       >
     </div>
     <div id="auth-and-theme" class="w-1/5 flex justify-around">
-      <div id="auth" class="flex justify-around w-2/3">
+      <div id="auth" class="flex justify-around w-2/3" v-show="!userLoggedIn">
         <router-link
           class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white"
           to="/login"
@@ -48,6 +71,14 @@ const toggleDark = useToggle(isDark);
           to="/register"
           >Register</router-link
         >
+      </div>
+      <div id="logOut" class="flex justify-around w-2/3" v-show="userLoggedIn">
+        <a
+          class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white"
+          @click="signOut()"
+        >
+          Log Out
+        </a>
       </div>
       <div id="theme">
         <span class="text-gray dark:text-slate-200" @click="toggleDark()">

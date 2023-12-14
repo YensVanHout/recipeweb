@@ -8,6 +8,10 @@ const props = defineProps({
     required: true,
     type: String,
   },
+  title: {
+    required: true,
+    type: String,
+  },
 });
 </script>
 <template>
@@ -73,7 +77,7 @@ const props = defineProps({
                   class="text-base font-semibold leading-6 text-gray-900"
                   id="modal-title"
                 >
-                  Delete recipe
+                  {{ props.title }}
                 </h3>
                 <div class="mt-2">
                   <p class="text-sm text-gray-500">
