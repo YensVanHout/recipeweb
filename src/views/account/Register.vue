@@ -8,7 +8,7 @@ const password = ref<string>("");
 
 const errorMsg = ref();
 
-async function signUpNewUser() {
+const signUpNewUser = async () => {
   const { error } = await supabase.auth.signUp({
     email: email.value,
     password: password.value,
@@ -18,7 +18,7 @@ async function signUpNewUser() {
   });
 
   errorMsg.value = error;
-}
+};
 </script>
 
 <template>

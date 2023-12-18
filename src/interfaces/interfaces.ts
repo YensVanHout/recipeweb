@@ -7,4 +7,5 @@ export interface recipe {
   time: string | null;
   title: string;
   tools: string[] | null;
+  image: string | null;
 }

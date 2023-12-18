@@ -2,20 +2,21 @@
 import { ref } from "vue";
 import Title from "../../components/Title.vue";
 import { supabase } from "../../lib/supabaseClient";
+import ErrorMsg from "../../components/ErrorMsg.vue";
 
 const email = ref<string>("");
 const password = ref<string>("");
 
 const errorMsg = ref();
 
-async function signInWithEmail() {
-  const { data, error } = await supabase.auth.signInWithPassword({
+const signInWithEmail = async () => {
+  const { error } = await supabase.auth.signInWithPassword({
     email: email.value,
     password: password.value,
   });
 
-  !error ? console.log(data) : (errorMsg.value = error);
-}
+  error ? (errorMsg.value = error) : undefined;
+};
 </script>
 
 <template>
@@ -42,6 +43,8 @@ async function signInWithEmail() {
           required
         />
       </fieldset>
+      <ErrorMsg :message="errorMsg" v-if="errorMsg" />
+
       <div>
         <button
           class="btn-complementary mt-2 mx-auto px-6"

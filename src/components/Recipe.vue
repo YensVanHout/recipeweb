@@ -1,15 +1,26 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Modal from "./Modal.vue";
+import { checkUserState } from "../helpers/helpers";
+import { supabase } from "../lib/supabaseClient";
 
-const showModal = ref<Boolean>(false);
-
-const deleteRecipe = (id: string | undefined) => {
-  console.log(props.Recipe);
-  console.log(id);
-};
 const props = defineProps({
   Recipe: Object,
+});
+
+const showModal = ref<Boolean>(false);
+const userLoggedIn = ref<boolean>(false);
+
+const deleteRecipe = (id: string) => {
+  supabase.from("recipes").delete().eq("id", id);
+};
+
+const checkUser = async () => {
+  const status = await checkUserState();
+  userLoggedIn.value = status;
+};
+onMounted(() => {
+  checkUser();
 });
 </script>
 <template>
@@ -30,6 +41,7 @@ const props = defineProps({
       <button
         class="btn-complementary mx-auto px-4"
         @click="showModal = !showModal"
+        v-if="userLoggedIn"
       >
         Delete Recipe
       </button>

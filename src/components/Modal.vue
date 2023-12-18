@@ -52,7 +52,7 @@ const props = defineProps({
         <div
           class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg"
         >
-          <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+          <div class="bg-white dark:bg-stone-800 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
             <div class="sm:flex sm:items-start">
               <div
                 class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
@@ -74,20 +74,22 @@ const props = defineProps({
               </div>
               <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                 <h3
-                  class="text-base font-semibold leading-6 text-gray-900"
+                  class="text-base font-semibold leading-6 text-gray-900 dark:text-slate-200"
                   id="modal-title"
                 >
                   {{ props.title }}
                 </h3>
                 <div class="mt-2">
-                  <p class="text-sm text-gray-500">
+                  <p class="text-sm text-gray-500 dark:text-slate-400">
                     {{ props.message }}
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+          <div
+            class="bg-gray-50 dark:bg-stone-800 border-t-2 border-t-stone-300 dark:border-t-slate-400 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+          >
             <button
               type="button"
               class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"

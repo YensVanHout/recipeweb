@@ -4,7 +4,7 @@ import Title from "../../components/Title.vue";
 <template>
   <div id="container" class="md:w-2/3 mx-auto">
     <Title title="About" />
-    <p class="mt-4 font-bold text-xl">
+    <p class="mt-4 font-bold text-xl dark:text-slate-300">
       This is a hobby project I created because I never know what to eat.<br />
       So I decided to make an application where I could store my favourite
       recipes.<br />

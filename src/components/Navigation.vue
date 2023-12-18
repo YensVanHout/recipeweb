@@ -2,29 +2,30 @@
 import { useDark, useToggle } from "@vueuse/core";
 import { supabase } from "../lib/supabaseClient";
 import { onMounted, ref } from "vue";
+import { checkUserState } from "../helpers/helpers";
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
-const userLoggedIn = ref(false);
+const userLoggedIn = ref<boolean>(false);
 
 const errorMsg = ref();
 
-async function signOut() {
+const signOut = async () => {
   const { error } = await supabase.auth.signOut();
 
   errorMsg.value = error;
   window.location.pathname = "/";
-}
+};
 
-async function checkUserState() {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+const checkUser = async () => {
+  const status = await checkUserState();
 
-  userLoggedIn.value = user ? true : false;
-}
+  userLoggedIn.value = status;
+};
 
-onMounted(() => checkUserState());
+onMounted(() => {
+  checkUser();
+});
 </script>
 
 <template>

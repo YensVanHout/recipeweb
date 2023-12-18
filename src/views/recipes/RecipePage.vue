@@ -10,13 +10,16 @@ const id: ComputedRef<string> = computed(() => route.params.id.toString());
 const recipe = ref<recipe>();
 const errorMsg = ref();
 
-async function getRecipeById(id: ComputedRef<string>) {
-  const { data, error } = await supabase.from("recipes").select().eq("id", id);
+const getRecipeById = async (id: ComputedRef<string>) => {
+  const { data, error } = await supabase
+    .from("recipes")
+    .select()
+    .eq("id", id.value);
 
   !error
-    ? (recipe.value = data as unknown as recipe)
+    ? (recipe.value = data[0] as unknown as recipe)
     : (errorMsg.value = error);
-}
+};
 
 onMounted(() => {
   getRecipeById(id);

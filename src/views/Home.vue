@@ -2,18 +2,12 @@
 import RecipePreview from "../components/RecipePreview.vue";
 import { recipe } from "../interfaces/interfaces";
 import { onMounted, ref } from "vue";
-
-import { supabase } from "../lib/supabaseClient";
+import { getRecipes } from "../helpers/helpers";
 
 const recipes = ref<recipe[]>();
 
-async function getRecipes() {
-  const { data } = await supabase.from("recipes").select().limit(6);
-  recipes.value = data as unknown as recipe[];
-}
-
-onMounted(() => {
-  getRecipes();
+onMounted(async () => {
+  recipes.value = (await getRecipes()).data;
 });
 </script>
 <template>
