@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const props = defineProps<{
   title: string;
-  id: string | undefined;
-  tags: string[] | null;
+  id: string | null | undefined;
+  tags: string[] | null | undefined;
 }>();
 </script>
 <template>

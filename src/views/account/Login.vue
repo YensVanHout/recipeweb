@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Title from "../../components/Title.vue";
 import { supabase } from "../../lib/supabaseClient";
 import ErrorMsg from "../../components/ErrorMsg.vue";
+import router from "../../router";
+
+import { checkUserState } from "../../helpers/helpers";
 
 const email = ref<string>("");
 const password = ref<string>("");
@@ -15,8 +18,14 @@ const signInWithEmail = async () => {
     password: password.value,
   });
 
-  error ? (errorMsg.value = error) : undefined;
+  error ? (errorMsg.value = error) : router.go(0);
 };
+
+onMounted(async () => {
+  const userLoggedIn = await checkUserState();
+
+  userLoggedIn ? router.push("/") : undefined;
+});
 </script>
 
 <template>

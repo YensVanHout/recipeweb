@@ -63,29 +63,39 @@ onMounted(() => {
     <div id="auth-and-theme" class="w-1/5 flex justify-around">
       <div id="auth" class="flex justify-around w-2/3" v-show="!userLoggedIn">
         <router-link
-          class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white"
+          class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white cursor-pointer"
           to="/login"
           >Log in</router-link
         >
         <router-link
-          class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white"
+          class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white cursor-pointer"
           to="/register"
           >Register</router-link
         >
       </div>
       <div id="logOut" class="flex justify-around w-2/3" v-show="userLoggedIn">
         <a
-          class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white"
+          class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white cursor-pointer"
           @click="signOut()"
         >
           Log Out
         </a>
       </div>
       <div id="theme">
-        <span class="text-gray dark:text-slate-200" @click="toggleDark()">
+        <span
+          class="text-gray dark:text-slate-200 cursor-pointer hover:text-black"
+          @click="toggleDark()"
+        >
           {{ isDark ? "Dark" : "Light" }}</span
         >
       </div>
     </div>
   </nav>
 </template>
+
+<style scoped>
+.router-link-active {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+</style>

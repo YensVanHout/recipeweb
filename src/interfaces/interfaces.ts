@@ -1,11 +1,12 @@
-export interface recipe {
-  date_create: string | null;
-  id: string;
+export type recipe = {
+  creator?: string | null;
+  date_create?: string | null;
+  id?: string;
+  image?: string | null;
   ingredients: string[];
   steps: string[];
-  tags: string[] | null;
-  time: string | null;
+  tags?: string[] | null;
+  time?: string | null;
   title: string;
-  tools: string[] | null;
-  image: string | null;
-}
+  tools?: string[] | null;
+};

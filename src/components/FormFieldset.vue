@@ -24,7 +24,7 @@ const props = defineProps({
 
         <button
           type="button"
-          @click="() => props.Array!.splice(index, 1)"
+          @click="() => props.Array!.slice(index, 1)"
           class="bg-red-700 p-1.5 font-bold rounded h-1/2 m-2"
         >
           <svg

@@ -39,12 +39,17 @@ onMounted(() => {
         {{ props.Recipe?.title }}
       </h2>
       <button
-        class="btn-complementary mx-auto px-4"
+        class="btn-complementary mx-auto px-4 hidden"
         @click="showModal = !showModal"
         v-if="userLoggedIn"
       >
         Delete Recipe
       </button>
+    </div>
+    <div id="tagList" class="mt-4 flex justify-center">
+      <span class="pill" v-for="tag in props.Recipe?.tags">
+        {{ tag }}
+      </span>
     </div>
     <div class="text-center m-4">
       <h3 class="text-2xl mr-4 h-full">{{ props.Recipe?.time }}</h3>
@@ -56,36 +61,42 @@ onMounted(() => {
       />
     </div> -->
     <div id="recipeDetails" class="ml-6 md:flex justify-evenly md:text-xl">
-      <div id="ingredientList" class="mt-6 w-1/6 md:text-xl">
+      <div
+        id="ingredientList"
+        class="mt-6 w-1/6 md:text-xl"
+        :class="props.Recipe.tools.length == 0 ? 'w-1/3' : ''"
+      >
         <h2 class="text-2xl">Ingredients:</h2>
         <ul class="list-disc">
-          <li v-for="ingredient in props.Recipe?.ingredients">
+          <li v-for="ingredient in props.Recipe?.ingredients" class="pb-4">
             {{ ingredient }}
           </li>
         </ul>
       </div>
-      <div id="toolList" class="mt-6 w-1/6 md:text-xl">
+      <div
+        id="toolList"
+        class="mt-6 w-1/6 md:text-xl"
+        v-if="props.Recipe.tools.length > 0"
+      >
         <h2 class="text-2xl">Tools:</h2>
         <ul class="list-disc">
-          <li v-for="tool in props.Recipe?.tools">
+          <li v-for="tool in props.Recipe?.tools" class="pb-4">
             {{ tool }}
           </li>
         </ul>
       </div>
-      <div id="stepList" class="mt-6 w-1/6 md:text-xl">
+      <div
+        id="stepList"
+        class="mt-6 w-1/6 md:text-xl"
+        :class="props.Recipe.tools.length == 0 ? 'w-1/3' : ''"
+      >
         <h2 class="text-2xl">Steps:</h2>
         <ol class="list-decimal">
-          <li v-for="step in props.Recipe?.steps">
+          <li v-for="step in props.Recipe?.steps" class="pb-4">
             {{ step }}
           </li>
         </ol>
       </div>
-    </div>
-
-    <div id="tagList" class="mt-6 flex justify-center">
-      <span class="pill" v-for="tag in props.Recipe?.tags">
-        {{ tag }}
-      </span>
     </div>
   </div>
 

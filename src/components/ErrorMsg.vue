@@ -7,9 +7,11 @@ const props = defineProps({
 });
 </script>
 <template>
-  <div id="errorBox" class="w-full h-8 bg-red-500">
-    <icon />
-    <p class="dark:text-white text-center w-full">{{ props.message }}</p>
+  <div
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+    role="alert"
+  >
+    <span class="block sm:inline">{{ props.message }}</span>
   </div>
 </template>
 <style scoped></style>

@@ -1,58 +1,68 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import FormFieldset from "../../components/FormFieldset.vue";
 import Title from "../../components/Title.vue";
 import { getUsername } from "../../helpers/helpers";
 import { supabase } from "../../lib/supabaseClient";
+import { recipe } from "../../interfaces/interfaces";
+import router from "../../router";
 
 const errorMsg = ref();
 
-const file = ref<File>();
-
-const creator = getUsername();
 const image = ref<string>("");
-const ingredients = ref<string[] | undefined>(["", ""]);
-const steps = ref<string[] | undefined>(["", ""]);
-const tags = ref<string[] | undefined>([""]);
+const ingredients = ref<string[] | null>(["", ""]);
+const steps = ref<string[] | null>(["", ""]);
+const tags = ref<string[] | null>([""]);
 const time = ref<string>("");
 const title = ref<string>("");
-const tools = ref<string[] | undefined>([""]);
+const tools = ref<string[] | null>([""]);
 
-const recipe = reactive({
-  creator: creator,
-  date_create: undefined,
-  id: undefined,
-  image: image.value,
-  ingredients: ingredients.value?.filter((str) => str !== ""),
-  steps: steps.value?.filter((str) => str !== ""),
-  tags: tags.value?.filter((str) => str !== ""),
-  time: time.value,
-  title: title.value,
-  tools: tools.value?.filter((str) => str !== ""),
-});
+//WIP IMAGES FOR RECIPES
 
-const uploadImage = async (fileName: string, file: any) => {
-  const { data, error } = await supabase.storage
-    .from("recipe_images")
-    .upload(`public/${fileName}.png`, file, {
-      cacheControl: "3600",
-      upsert: false,
-    });
-  return !error ? data : error;
+// const file = ref();
+
+// const uploadImage = async (fileName: string, file: any) => {
+//   const { data, error } = await supabase.storage
+//     .from("recipe_images")
+//     .upload(`public/${fileName}.png`, file, {
+//       cacheControl: "3600",
+//       upsert: false,
+//     });
+//   return !error ? data : error;
+// };
+
+// const handleImage = (event: any) => {
+//   file.value = event.target.files[0];
+//   console.log(file.value);
+//   console.log("test");
+// };
+
+const submitRecipe = async (recipe: recipe) => {
+  const { data, error } = await supabase
+    .from("recipes")
+    .insert(recipe)
+    .select("id");
+  console.log(data);
+  error ? (errorMsg.value = error) : router.push("/recipe/" + data[0].id);
 };
 
-const handleImage = (event: any) => {
-  const file = event.target.files;
-  file.value = file[0];
-};
+const handleSubmit = async () => {
+  const username = await getUsername();
 
-const submitRecipe = async () => {
-  //image.value = uploadImage(
-  //  title.value.replace(" ", "_").toLowerCase(),
-  //  file.value
-  //);
-  //const { error } = await supabase.from("recipes").insert(recipe);
-  //error ? (errorMsg.value = error) : null;
+  const recipe = ref<recipe>({
+    creator: "",
+    image: image.value,
+    ingredients: ingredients.value?.filter((str) => str !== "") as string[],
+    steps: steps.value?.filter((str) => str !== "") as string[],
+    tags: tags.value?.filter((str) => str !== "") as string[],
+    time: time.value,
+    title: title.value,
+    tools: tools.value?.filter((str) => str !== "") as string[],
+  });
+
+  recipe.value.creator = username;
+
+  submitRecipe(recipe.value);
 };
 </script>
 
@@ -86,7 +96,7 @@ const submitRecipe = async () => {
           required
         />
       </fieldset>
-      <fieldset class="w-2/3 m-auto">
+      <fieldset class="w-2/3 m-auto hidden">
         <label
           for="image"
           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -105,29 +115,29 @@ const submitRecipe = async () => {
         <FormFieldset
           class="w-full md:w-1/3 md:m-4"
           Name="Ingredient"
-          :Array="ingredients"
+          :Array="(ingredients as String[])"
         />
         <FormFieldset
           class="w-full md:w-1/3 md:m-4"
           Name="Step"
-          :Array="steps"
+          :Array="(steps as String[])"
         />
         <FormFieldset
           class="w-full md:w-1/3 md:m-4"
           Name="Tool"
-          :Array="tools"
+          :Array="(tools as String[])"
         />
         <FormFieldset
           class="w-full md:w-1/3 md:m-4"
           Name="Tags"
-          :Array="tags"
+          :Array="(tags as String[])"
         />
       </div>
       <div>
         <button
           class="btn-complementary mt-2 mx-auto px-6"
           type="button"
-          @click="submitRecipe()"
+          @click="handleSubmit()"
         >
           Submit
         </button>
