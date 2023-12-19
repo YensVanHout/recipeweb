@@ -21,6 +21,7 @@ onMounted(async () => {
   <div class="md:w-2/3 mx-auto">
     <Title title="Collection" />
     <SubTitle
+      class="dark:text-slate-300"
       :title="loading == true ? 'Fetching recipes ...' : loading == false && recipes!.recipes.length >= 0 ? recipes?.amount.toString() + ' recipes found' : 'Error fetching recipes ...'"
     />
     <div class="md:flex flex-wrap justify-around" :v-if="recipes?.recipes">

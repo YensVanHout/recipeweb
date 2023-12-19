@@ -7,19 +7,23 @@ import ErrorMsg from "../../components/ErrorMsg.vue";
 const registrationDone = ref<boolean>(false);
 const email = ref<string>("");
 const password = ref<string>("");
+const confirmPassword = ref<string>("");
 
 const errorMsg = ref();
 
 const signUpNewUser = async () => {
-  const { error } = await supabase.auth.signUp({
-    email: email.value,
-    password: password.value,
-    options: {
-      emailRedirectTo: "https://localhost:5173",
-    },
-  });
-
-  errorMsg.value = error;
+  if (password.value == confirmPassword.value) {
+    const { error } = await supabase.auth.signUp({
+      email: email.value,
+      password: password.value,
+      options: {
+        emailRedirectTo: "https://localhost:5173",
+      },
+    });
+    errorMsg.value = error;
+  } else {
+    errorMsg.value = "Passwords don't match";
+  }
 
   errorMsg ? undefined : (registrationDone.value = true);
 };
@@ -34,7 +38,9 @@ const signUpNewUser = async () => {
       v-if="!registrationDone"
     >
       <fieldset class="text-center mb-3">
-        <label for="email" class="block text-2xl">E-mail:</label>
+        <label for="email" class="block text-2xl dark:text-slate-200"
+          >E-mail:</label
+        >
         <input
           type="email"
           name="email"
@@ -43,13 +49,26 @@ const signUpNewUser = async () => {
           v-model="email"
           required
         />
-        <label for="password" class="block text-2xl">Password:</label>
+        <label for="password" class="block text-2xl dark:text-slate-200"
+          >Password:</label
+        >
         <input
           type="password"
           name="password"
           id="password"
           class="p-1 rounded"
           v-model="password"
+          required
+        />
+        <label for="cpassword" class="block text-2xl dark:text-slate-200"
+          >Confirm Password:</label
+        >
+        <input
+          type="cpassword"
+          name="cpassword"
+          id="cpassword"
+          class="p-1 rounded"
+          v-model="confirmPassword"
           required
         />
       </fieldset>
@@ -65,8 +84,8 @@ const signUpNewUser = async () => {
       </div>
     </form>
     <div v-if="registrationDone" class="w-full text-center items-center">
-      <h2 class="text-2xl">Thank you for registering!</h2>
-      <p class="text-xl`">
+      <h2 class="text-2xl dark:text-slate-200">Thank you for registering!</h2>
+      <p class="text-xl dark:text-slate-200">
         Almost there!<br />
         We've sent you an email to <strong>{{ email }}</strong> with a link to
         activate your recipeweb account. <br />
