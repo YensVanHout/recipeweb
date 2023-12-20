@@ -11,18 +11,26 @@ const confirmPassword = ref<string>("");
 
 const errorMsg = ref();
 
+const passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
 const signUpNewUser = async () => {
-  if (password.value == confirmPassword.value) {
-    const { error } = await supabase.auth.signUp({
-      email: email.value,
-      password: password.value,
-      options: {
-        emailRedirectTo: "https://localhost:5173",
-      },
-    });
-    errorMsg.value = error;
+  if (passwordRegExp.test(password.value)) {
+    console.log("passed");
+    if (password.value == confirmPassword.value) {
+      const { error } = await supabase.auth.signUp({
+        email: email.value,
+        password: password.value,
+        options: {
+          emailRedirectTo: "https://localhost:5173",
+        },
+      });
+      errorMsg.value = error;
+    } else {
+      errorMsg.value = "Passwords don't match";
+    }
   } else {
-    errorMsg.value = "Passwords don't match";
+    errorMsg.value =
+      "Password must contain:\n - 8 characters\n - 1 lowercase character\n - 1 uppercase character\n - 1 symbol";
   }
 
   errorMsg ? undefined : (registrationDone.value = true);
@@ -64,7 +72,7 @@ const signUpNewUser = async () => {
           >Confirm Password:</label
         >
         <input
-          type="cpassword"
+          type="password"
           name="cpassword"
           id="cpassword"
           class="p-1 rounded"

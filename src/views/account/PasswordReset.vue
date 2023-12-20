@@ -8,7 +8,7 @@ const email = ref<string>("");
 
 const passwordReset = async () => {
   await supabase.auth.resetPasswordForEmail(email.value, {
-    redirectTo: "https://lq7m8kv0-5173.euw.devtunnels.ms/change-password",
+    redirectTo: "https://localhost:5173/change-password",
   });
 
   resetDone.value = true;
