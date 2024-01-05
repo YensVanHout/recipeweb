@@ -17,14 +17,8 @@ const signOut = async () => {
   window.location.pathname = "/";
 };
 
-const checkUser = async () => {
-  const status = await checkUserState();
-
-  userLoggedIn.value = status;
-};
-
-onMounted(() => {
-  checkUser();
+onMounted(async () => {
+  userLoggedIn.value = await checkUserState()
 });
 </script>
 
@@ -77,9 +71,7 @@ onMounted(() => {
         <a
           class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white cursor-pointer"
           @click="signOut()"
-        >
-          Log Out
-        </a>
+        >Log Out</a>
       </div>
       <div id="theme">
         <span

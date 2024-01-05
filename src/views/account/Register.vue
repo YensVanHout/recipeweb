@@ -15,7 +15,6 @@ const passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 const signUpNewUser = async () => {
   if (passwordRegExp.test(password.value)) {
-    console.log("passed");
     if (password.value == confirmPassword.value) {
       const { error } = await supabase.auth.signUp({
         email: email.value,

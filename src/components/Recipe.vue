@@ -39,7 +39,7 @@ onMounted(() => {
         {{ props.Recipe?.title }}
       </h2>
       <button
-        class="btn-complementary mx-auto px-4 hidden"
+        class="btn-complementary mx-auto px-4"
         @click="showModal = !showModal"
         v-if="userLoggedIn"
       >
@@ -60,7 +60,7 @@ onMounted(() => {
         alt="Chili con carne"
       />
     </div> -->
-    <div id="recipeDetails" class="ml-6 md:flex justify-evenly md:text-xl">
+    <div id="recipeDetails" class="ml-6 md:flex justify-around md:text-xl">
       <div
         id="ingredientList"
         class="mt-6 w-1/6 md:text-xl"
@@ -88,7 +88,7 @@ onMounted(() => {
       <div
         id="stepList"
         class="mt-6 w-1/6 md:text-xl"
-        :class="props.Recipe.tools.length == 0 ? 'w-1/3' : ''"
+        :class="props.Recipe.tools.length == 0 ? 'w-1/2' : ''"
       >
         <h2 class="text-2xl">Steps:</h2>
         <ol class="list-decimal">
