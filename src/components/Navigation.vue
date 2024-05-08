@@ -79,7 +79,12 @@ onMounted(async () => {
           >Register</router-link
         >
       </div>
-      
+      <div id="logOut" class="flex justify-around" v-show="userLoggedIn">
+        <a
+        class="text-gray dark:text-slate-200 hover:text-black dark:hover:text-white cursor-pointer px-4 py-2 my-4 leading-none border rounded border-slate-400 hover:text-white hover:bg-slate-400 dark:border-white inline-block"
+          @click="signOut()"
+        >Log Out</a>
+      </div>
       </div>
       <div id="theme">
         <p
