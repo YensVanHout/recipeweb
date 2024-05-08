@@ -6,6 +6,7 @@ import { getUsername } from "../../helpers/helpers";
 import { supabase } from "../../lib/supabaseClient";
 import { recipe } from "../../interfaces/interfaces";
 import router from "../../router";
+import Label from "../../components/Label.vue";
 
 const errorMsg = ref();
 
@@ -71,9 +72,7 @@ const handleSubmit = async () => {
     <Title class="md:w-2/3 mx-auto" title="Add recipe" />
     <form class="w-fit md:w-1/2 mx-auto">
       <fieldset class="text-center mb-3">
-        <label for="title" class="block text-2xl dark:text-stone-200"
-          >Title:</label
-        >
+        <Label title="Title" />
         <input
           type="text"
           name="title"
@@ -84,9 +83,7 @@ const handleSubmit = async () => {
         />
       </fieldset>
       <fieldset class="text-center mb-3">
-        <label for="time" class="block text-2xl dark:text-stone-200"
-          >Time to cook:</label
-        >
+        <Label title="Time to cook" />
         <input
           type="text"
           name="time"
@@ -96,12 +93,8 @@ const handleSubmit = async () => {
           required
         />
       </fieldset>
-      <fieldset class="w-2/3 m-auto hidden">
-        <label
-          for="image"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >Image:</label
-        >
+      <fieldset class="w-2/3 m-auto">
+        <Label title="Image" />
         <input
           type="file"
           accept="image/*"
